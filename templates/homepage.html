@@ -1,0 +1,1084 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="./landing.css">
+    <link rel="stylesheet" href="./responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap" rel="stylesheet">
+    <title>Netflix Homepage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    
+    <div style="position: relative;">
+    <!-- header -->
+    <nav class="navbar navbar-expand-lg netflix-navbar netflix-padding-left netflix-padding-right">
+      <div class="container-fluid">
+        <div class="netflix-row">
+          <div class="left d-flex align-items-center">
+            <a class="navbar-brand" href="#">
+              <img src="{% static 'assets/netflix.png' %}" alt="">
+            </a>
+            <div  class="netflix-nav">
+               <section>
+                  <button>Home</button>
+                  <button>TV Shows</button>
+                  <button>Movies</button>
+                  <button>News & Popular</button>
+                  <button>My List</button>
+               </section>
+               
+            </div>
+            <div class="netflix-dropdown-box dropdown">
+              <button class="netflix-dropdown dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Browse
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Home</a></li>
+                <li><a class="dropdown-item" href="#">TV Shows</a></li>
+                <li><a class="dropdown-item" href="#">Movies</a></li>
+                <li><a class="dropdown-item" href="#">News & Popular</a></li>
+                <li><a class="dropdown-item" href="#">My List</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="right d-flex align-items-center">
+            <i class="bi bi-search"style="margin-right:-1.5rem;"></i>
+            <i class="bi bi-bell-fill" style="margin-left:0.4rem;"></i>
+            <section class="netflix-profile " style="margin-left:0.2rem;">
+               <img src="{% static 'assets/icons/7.jpg' %}" style="height: 30px; width:30px; border-radius: 4px;" alt="">
+            </section>
+            <a href="{% url 'account_logout' %}" id="in"> Logout </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- /header -->
+
+
+    <!-- video -->
+      <div class="">
+         <section class="netflix-home-video">
+            <div class="top"></div>
+            <div class="bottom"></div>
+            <video src="{% static 'assets/video.mp4' %}" autoplay muted loop></video>
+            <div class="content">
+                <section class="left">
+                    <img src="{%static 'assets/image2.webp'%}" alt="">
+                
+                    <div class="d-flex mt-2">
+                      <button class="btn btn-light m-2" > <i class="bi bi-play-fill" style="color: black; padding: 0%;"></i> Play Now </button>
+                      <button class="btn btn-secondary m-2 build-link" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-info-circle" style=" padding: 0%;" ></i> More Info</button>
+                    </div>
+                </section>
+               
+            </div>
+          </section>
+         
+      </div>
+    <!-- video -->
+
+      <!-- sliders -->
+      <div class="slider-box">
+        <div class="container-fluid slider" style="margin-left:1.5rem">
+          <section class="d-flex justify-content-between margin-right">
+            <p class="text-white"> <b>Trending</b> </p>
+            <div class="">
+              <button  type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active tab-change-btn" aria-current="true" aria-label="Slide 1"></button>
+              <button class="tab-change-btn" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button class="tab-change-btn" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+          </section>
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            
+            <div class="carousel-inner" style="position: relative; overflow: visible;">
+              <div class="carousel-item active">
+                <section class="d-flex" style="">
+                  {% for movie in movies|slice:":5" %}
+                  <div class="card"  >
+                      <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                      
+                      <div class="card-body"> 
+                       <div class="shd">.</div>
+                          <section class="d-flex justify-content-between">
+                            <div>
+                              <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                              <i  class="bi bi-plus-circle card-icon"></i>
+                              <i class="bi bi-hand-thumbs-up card-icon"></i>
+                            </div>
+                            <div>                                   
+                              <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                                
+                            </div>
+                          </section>
+                          <section class="d-flex align-items-center justify-content-between" >
+                             <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                               <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                            
+                            </section>
+                            <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </section>
+              </div>
+              <div class="carousel-item">
+                <section class="d-flex">
+                  {% for movie in movies|slice:"5:10" %}
+                  <div class="card"  >
+                    <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                    
+                    <div class="card-body"> 
+                     <div class="shd">.</div>
+                        <section class="d-flex justify-content-between">
+                          <div>
+                            <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                            <i  class="bi bi-plus-circle card-icon"></i>
+                            <i class="bi bi-hand-thumbs-up card-icon"></i>
+                          </div>
+                          <div>                                   
+                            <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                              
+                          </div>
+                        </section>
+                        <section class="d-flex align-items-center justify-content-between" >
+                           <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                             <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                          
+                          </section>
+                          <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </section>
+              </div>
+              <div class="carousel-item">
+                <section class="d-flex" >
+                  {% for movie in movies|slice:"10:15" %}
+                  <div class="card"  >
+                    <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                    
+                    <div class="card-body"> 
+                     <div class="shd">.</div>
+                        <section class="d-flex justify-content-between">
+                          <div>
+                            <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                            <i  class="bi bi-plus-circle card-icon"></i>
+                            <i class="bi bi-hand-thumbs-up card-icon"></i>
+                          </div>
+                          <div>                                   
+                            <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                              
+                          </div>
+                        </section>
+                        <section class="d-flex align-items-center justify-content-between" >
+                           <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                             <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                          
+                          </section>
+                          <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </section>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div> 
+        <div class="container-fluid slider2" style="margin-left:1.5rem">
+          <section class="d-flex justify-content-between margin-right">
+            <p class="text-white"> <b>Trending</b> </p>
+            <div class="">
+              <button  type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active tab-change-btn" aria-current="true" aria-label="Slide 1"></button>
+              <button class="tab-change-btn" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button class="tab-change-btn" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+          </section>
+          <div id="carouselExampleIndicators1" class="carousel slide" data-bs-ride="carousel">
+            
+            <div class="carousel-inner" style="position: relative; overflow: visible;">
+              <div class="carousel-item active">
+                <section class="d-flex" style="">
+                  {% for movie in movies|slice:"5:10" %}
+                  <div class="card"  >
+                      <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                      
+                      <div class="card-body"> 
+                       <div class="shd">.</div>
+                          <section class="d-flex justify-content-between">
+                            <div>
+                              <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                              <i  class="bi bi-plus-circle card-icon"></i>
+                              <i class="bi bi-hand-thumbs-up card-icon"></i>
+                            </div>
+                            <div>                                   
+                              <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                                
+                            </div>
+                          </section>
+                          <section class="d-flex align-items-center justify-content-between" >
+                             <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                               <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                            
+                            </section>
+                            <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </section>
+              </div>
+              <div class="carousel-item">
+                <section class="d-flex">
+                  {% for movie in movies|slice:"1:6" %}
+                  <div class="card"  >
+                    <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                    
+                    <div class="card-body"> 
+                     <div class="shd">.</div>
+                        <section class="d-flex justify-content-between">
+                          <div>
+                            <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                            <i  class="bi bi-plus-circle card-icon"></i>
+                            <i class="bi bi-hand-thumbs-up card-icon"></i>
+                          </div>
+                          <div>                                   
+                            <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                              
+                          </div>
+                        </section>
+                        <section class="d-flex align-items-center justify-content-between" >
+                           <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                             <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                          
+                          </section>
+                          <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </section>
+              </div>
+              <div class="carousel-item">
+                <section class="d-flex" >
+                  {% for movie in movies|slice:"10:15" %}
+                  <div class="card"  >
+                    <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                    
+                    <div class="card-body"> 
+                     <div class="shd">.</div>
+                        <section class="d-flex justify-content-between">
+                          <div>
+                            <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                            <i  class="bi bi-plus-circle card-icon"></i>
+                            <i class="bi bi-hand-thumbs-up card-icon"></i>
+                          </div>
+                          <div>                                   
+                            <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                              
+                          </div>
+                        </section>
+                        <section class="d-flex align-items-center justify-content-between" >
+                           <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                             <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                          
+                          </section>
+                          <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </section>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <div class="container-fluid slider3" style="margin-left:1.5rem">
+          <section class="d-flex justify-content-between margin-right">
+            <p class="text-white"> <b>Trending</b> </p>
+            <div class="">
+              <button  type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active tab-change-btn" aria-current="true" aria-label="Slide 1"></button>
+              <button class="tab-change-btn" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button class="tab-change-btn" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+          </section>
+          <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+            
+            <div class="carousel-inner" style="position: relative; overflow: visible;">
+              <div class="carousel-item active">
+                <section class="d-flex" style="">
+                  {% for movie in movies|slice:"6:11" %}
+                  <div class="card"  >
+                      <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                      
+                      <div class="card-body"> 
+                       <div class="shd">.</div>
+                          <section class="d-flex justify-content-between">
+                            <div>
+                              <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                              <i  class="bi bi-plus-circle card-icon"></i>
+                              <i class="bi bi-hand-thumbs-up card-icon"></i>
+                            </div>
+                            <div>                                   
+                              <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                                
+                            </div>
+                          </section>
+                          <section class="d-flex align-items-center justify-content-between" >
+                             <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                               <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                            
+                            </section>
+                            <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </section>
+              </div>
+              <div class="carousel-item">
+                <section class="d-flex">
+                  {% for movie in movies|slice:"1:6" %}
+                  <div class="card"  >
+                    <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                    
+                    <div class="card-body"> 
+                     <div class="shd">.</div>
+                        <section class="d-flex justify-content-between">
+                          <div>
+                            <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                            <i  class="bi bi-plus-circle card-icon"></i>
+                            <i class="bi bi-hand-thumbs-up card-icon"></i>
+                          </div>
+                          <div>                                   
+                            <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                              
+                          </div>
+                        </section>
+                        <section class="d-flex align-items-center justify-content-between" >
+                           <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                             <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                          
+                          </section>
+                          <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </section>
+              </div>
+              <div class="carousel-item">
+                <section class="d-flex" >
+                  {% for movie in movies|slice:"0:1" %}
+                  <div class="card"  >
+                    <img src="{{movie.image.url}}" class="card-img-top imagesize" alt="...">
+                    
+                    <div class="card-body"> 
+                     <div class="shd">.</div>
+                        <section class="d-flex justify-content-between">
+                          <div>
+                            <a href="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}"><i class="bi bi-play-circle-fill card-icon"  ></i></a>
+                            <i  class="bi bi-plus-circle card-icon"></i>
+                            <i class="bi bi-hand-thumbs-up card-icon"></i>
+                          </div>
+                          <div>                                   
+                            <i class="bi bi-play-circle card-icon building-link" data-link="{% url 'netflixapp:play-movie' movie_id=movie.uuid %}" data-title="{{movie.title}}" data-description="{{movie.description}}"   data-img="{{movie.image.url}}" id="appear"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i>
+                              
+                          </div>
+                        </section>
+                        <section class="d-flex align-items-center justify-content-between" >
+                           <p class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</p> 
+                             <span class="m-2 netflix-card-text text-white">Limited Series</span> <span class="border netflix-card-text p-1 text-white">HD</span>
+                          
+                          </section>
+                          <span class="netflix-card-text text-white">Provocative • Psychological • Thriller</span>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </section>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- sliders-end -->
+
+
+      <!-- footer  -->
+      <div class="container footer">
+          <div class="row">
+            <div class="col-md-10 mx-auto">
+                <div class="row">
+                  <div class="col-md-3">
+                        <ul>
+                          <li>Audio and Subtitle</li>
+                          <li>Media Center</li>
+                          <li>Privacy</li>
+                          <li>Contact Us</li>
+                        </ul>
+                  </div>
+                  <div class="col-md-3">
+                    <ul>
+                      <li>Audio description</li>
+                      <li>Investor Relation</li>
+                      <li>Terms and Conditions</li>
+                      <li>Legal Notices</li>
+                    </ul>
+              </div>
+              <div class="col-md-3">
+                <ul>
+                  <li>Help Center</li>
+                  <li>Jobs</li>
+            
+                </ul>
+               </div>
+               <div class="col-md-3">
+                <ul>
+                  <li>Gift card</li>
+                  <li>Subscription</li>
+            
+                </ul>
+               </div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10 mx-auto">
+              <div class="row">
+               
+                <div class="col">
+                  <p class="copy-right">@netflix copyright</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog " id="bigbox">
+    <div class="d-flex justify-content-between ">
+      <h5 class="modal-title" id="staticBackdropLabel"></h5>
+      <span type="button" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;font-size:1.4rem; margin-right:1rem;color:white;">X</span>
+    </div>   
+    
+     <div>
+        <div class="bigcard h-100 modal-content img-center"  >
+          <div id="div5"> 
+           
+         <img id="movie-img" src="{% static 'assets/After.jpeg' %}"  class="bigcard-img-top bigimage"  alt="..."/> 
+              
+        </div>
+         
+          <div id="shadow"> 
+              <section class="d-flex justify-content-between m-3">
+                <div>
+                  <div id="movie-title"> After We Collided </div>
+                  <a id="movie-play" href="">  <button class="btn btn-light" style="top:17.4rem; padding: 0 1.5rem 0px 1.5rem  ; position: absolute; "> <i class="bi bi-play-fill" style="color: black; padding: 0%;"></i> Play</button>                    
+                  </a>
+                    <i  class="bi bi-plus-circle bigcard-icon" style="margin-left:6.7rem;"></i>
+                  <i class="bi bi-hand-thumbs-up bigcard-icon" style="margin-left:8.8rem;"></i>
+                </div>
+                <div>                                   
+                  <i class="bi bi-play-circle bigcard-icon"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="big" style="position:absolute; transform: rotate(90deg); margin-left:-1.5rem" id="chevron"></i> 
+                    
+                </div>
+              </section>
+          
+              <div class="casting">     
+                <div id="div1"> 
+                 <span class="netflix-card-text m-0" style="color: rgb(0, 186, 0);">97% match</span>                  
+                 <span class="m-1 netflix-bigcard-text text-white">2022</span> 
+                 <span class="border netflix-bigcard-text p-1 text-white">U/A 18+</span>
+                <span class="m-1 netflix-bigcard-text text-white">2hr 56m</span>
+                <span class="border netflix-bigcard-text p-1 text-white">HD</span>
+              </div>
+              <div >
+              <div id="div3"><b>Cast:</b><span class="netflix-bigcard-text text-white"> Me, Evee, Myself, you, Amar, Akbar, Anthony, Priya, Roni, Muskan</span></div>
+              <div id="div3" style="margin-top: 1rem;"><b>Genres:</b><span class="netflix-bigcard-text text-white"> Thriller, Crime, Comedy, Horror</span></div>
+              <div id="div3" style="margin-top: 1rem;"><b>This movie is:</b><span class="netflix-bigcard-text text-white"> Adrenaline Rush, Exciting, Limited Edition</span></div>
+              
+              </div>
+              <div style="color: white; margin-top: -1rem;" id="movie-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic molestiae quas accusamus delectus quae nostrum recusandae deleniti harum, praesentium, consequatur esse animi exercitationem nemo? Architecto saepe sit dolores fugiat culpa.</div> 
+              
+          </div>
+        </div>
+     
+</div>
+</div>
+
+    <!-- Optional JavaScript; choose one of the two!-->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+
+
+    <script src="./javaScript.js"></script>
+  
+  </body>
+</html>
+
+<!-- style1 -->
+<style>
+ body{
+    background-color: #141414;
+    overflow-x: hidden;
+    width: 100vw;
+    /* position: relative; */
+}
+#movie-title
+{
+  font-family: 'Vast Shadow', cursive;
+  position: absolute;
+  top: 13rem;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  color: rgb(224, 224, 224);
+}
+
+.netflix-padding-left{
+    padding-left: 57px;
+}
+
+
+.netflix-padding-right{
+    padding-right: 57px;
+}
+
+.netflix-navbar{
+    /* background-color: #0C0C0C !important; */
+    z-index: 1000;
+    transition: background 0.2s linear;
+    position: fixed;
+    width: 100vw;
+}
+
+.navbar-brand img{
+     width: 100px;
+}
+
+#in
+{
+  text-decoration: none;
+    color: white;
+    margin-left: 1rem;
+    margin-right: -2rem;
+    font-size: 1.1rem ;
+    background-color: red;
+    padding:8px 18px;
+    border-radius: 5px;
+}
+.netflix-row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+}
+.netflix-row .left{
+    width: max-content
+}
+.netflix-row .right{
+    width: max-content
+}
+
+.netflix-dropdown-box{
+    display: none;
+}
+
+.netflix-dropdown{
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 9px !important;
+}
+.imagesize
+{
+    max-width: 248px;
+    max-height: 139.6px;
+    min-width: 248px;
+    min-height: 139.6px;
+}
+.netflix-dropdown-box .dropdown-menu{
+    background-color: rgba(0, 0, 0, 0.784);
+    font-size: 9px !important;
+    color: #fff !important;
+    margin-left: -80px;
+    border-top: 3px solid #fff;
+    margin-top: 30px;
+}
+
+.netflix-dropdown-box .dropdown-menu .dropdown-item{
+     color: rgba(255, 255, 255, 0.646);
+     text-align: center;
+     width: 250px;
+     font-size: 15px;
+     padding: 10px 20px;
+}
+
+.netflix-dropdown-box .dropdown-menu .dropdown-item:hover{
+    background-color: rgba(255, 255, 255, 0.133);
+    color: #fff;
+}
+
+i{
+    font-size: 20px;
+    color: #fff;
+    padding: 5px 20px;
+}
+
+.netflix-profile{
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    border-radius: 4px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.netflix-nav{
+    display: block ;
+    align-items: center;
+}
+
+.netflix-nav button{
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.623);
+    border: none;
+    font-size: 13px;
+}
+
+.netflix-nav button:hover{
+    color: #fff;
+}
+
+
+.netflix-home-video{
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+.netflix-home-video .top{
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+}
+
+.netflix-home-video .bottom{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #141414);
+}
+.netflix-home-video video{
+    width: 100%;
+}
+
+
+.netflix-home-video .content{
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    /* background-color: #fff; */
+    z-index: 100;
+    display: flex;
+}
+
+.netflix-home-video .content .left{
+    margin-left: 80px;
+}
+.netflix-home-video .content .left img{
+   margin-top: 190px;
+   
+}
+.netflix-home-video .content .right{
+    width: 50%;
+}
+
+
+
+.slider{
+    position: absolute;
+    top: 600px ;
+    z-index: 500;
+    /* margin-left: 80px; */
+}
+
+
+
+.slider2{
+    position: absolute;
+    top: 800px ;
+    z-index: 400;
+}
+
+.slider3{
+    position: absolute;
+    top: 1000px ;
+    z-index: 300;
+}
+
+
+.card{
+    width: 250px;
+    background-color: #141414;
+    border-radius: 4px;
+    transition: 0.2s linear;
+    margin: 3px;
+    position: relative;
+}
+
+
+.card:hover{
+    transform: scaleX(1.4) scaleY(1.4);
+    
+    box-shadow: 0 0 30px .2px ;
+    z-index: 10;
+}
+.shd
+{
+    position: absolute;
+    min-width:14.2rem ;
+    margin: 0;
+    top:-1.5rem;
+    box-shadow: 0px 8px 25px -5px rgba(2, 2, 2, 0.979); 
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.card-body{
+    display: none;
+    box-shadow: 0 0 30px .2px;
+    /* height: 0px; */
+    padding: 10px 15px;
+    position: absolute;
+    background: #242525;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(center, #2b2c2c, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(center, #2d2d2e, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    top: 120px;
+    width: 100%;
+}
+
+
+.card-icon{
+    color: #fff;
+    padding: 0px !important;
+    font-size: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.card:hover > .card-body{
+    display: block;
+    /* height: max-content !important; */
+}
+
+
+
+.carousel-control-prev{
+    margin-left:-8rem;
+}
+
+.carousel-control-next{
+  margin-right:-4rem;
+}
+.carousel-control-prev:hover{
+    display: block;
+}
+
+.carousel-control-next:hover{
+    display: block;
+}
+
+.tab-change-btn{
+    border: none;
+    width: 30px !important;
+}
+
+
+.margin-right{
+    margin-right: 100px;
+}
+
+.netflix-card-text{
+    font-size: 12px ;
+}
+
+.position-slider2{
+    top: 10px !important;
+    position: absolute !important;
+}
+
+.margin-title2{
+    margin-top: 33px;
+}
+
+.position-slider3{
+    top: 10px !important;
+    position: absolute !important;
+}
+
+
+.footer{
+    margin-top: 35rem;
+    margin-bottom: 100px;
+}
+
+ul{
+    list-style: none;
+    font-size: 15px ;
+    color: rgba(255, 255, 255, 0.367);
+    font-weight: 100;
+}
+
+
+.service-btn{
+    background-color: transparent;
+     margin-left: 30px;
+      color: rgba(255, 255, 255, 0.367);
+      border: 1px solid rgba(255, 255, 255, 0.367);
+      font-size: 15px;
+      font-weight: 100;
+}
+
+.copy-right{
+    font-size: 15px;
+      font-weight: 200;
+      color: rgb(249, 14, 14);
+      margin-left: 28px;
+}
+#bigbox
+{
+    
+    max-width:55rem;
+    
+}
+
+.bigcard{
+    
+    box-shadow: 0 0 30px 15px ;
+    min-width: 55rem;
+    height: max-content;
+    z-index: -2;
+    background: #242525;  /* fallback for old browsers */
+background: -webkit-linear-gradient(center, #2b2c2c, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(center, #2d2d2e, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    border-radius: 4px;
+    margin: 3px;
+   
+    
+}
+
+.bigimage
+{
+       
+     max-width: 52rem;
+    max-height: 20rem;
+    z-index: -1;
+    position: relative;
+    min-width: 54.93rem;
+    min-height: 20rem;
+    box-shadow: 0px 50px 50px -30px rgba(0, 0, 0, 0.74);     
+    
+
+}
+
+
+.bigcard-icon{
+
+    color: #fff;
+    top:17rem; 
+   position: absolute;
+     padding: 1px;
+    font-size: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.casting
+{
+    margin: 1rem;
+    display: grid; 
+    text-align: justify;
+    max-width: 100%;
+    grid-template-rows: 3rem 5rem 6rem ;
+    grid-template-columns: 25rem 24rem;    
+    column-gap: 4rem;
+    row-gap: 1.3rem;
+    
+    
+}
+
+
+
+#div5
+{
+
+    box-shadow:inset 0 0 80px 10px rgba(0, 0, 0, 0.705) ;
+    
+}
+#div3
+{
+    
+    color: rgb(116, 116, 116);
+} 
+</style>
+
+<!-- style2 -->
+<style>
+  @media(max-width:767.98px){
+    .netflix-padding-left{
+        padding-left: 10px !important;
+    }
+    
+    
+    .netflix-padding-right{
+        padding-right: 10px !important;
+    }
+    .navbar-brand img{
+        width: 43px;
+   }
+   .navbar{
+       padding-top: unset !important;
+       padding-bottom: unset !important;
+   }
+   i{
+       font-size: 12px;
+       cursor: pointer;
+       padding: 5px !important;
+   }
+   .netflix-profile{
+       margin-left: 5px ;
+   }
+   .netflix-dropdown-box{
+    display: block;
+}
+.netflix-nav{
+    display: none !important;
+}
+
+/* video */
+.netflix-home-video .content .left{
+    margin-left: 25px;
+}
+.netflix-home-video .content .left img{
+    width: 200px;
+    margin-top: 90px !important;
+}
+button{
+    font-size: 10px !important;
+    width: max-content !important;
+    opacity: 0.8;
+}
+
+/*video*/
+.slider{
+    top: 250px;
+    margin-left: 0px;
+}
+
+.card{
+    width: 150px;
+}
+.card-icon{
+    font-size: 17px !important;
+}
+.card-body{
+    top: 80px !important;
+}
+
+
+.margin-right{
+    margin-right: unset;
+}
+
+.netflix-card-text{
+    font-size: 8px;
+}
+.position-slider2{
+    top: 0px !important;
+}
+.margin-title{
+    margin-top: 100px;
+}
+.margin-title2{
+    margin-top: 14px;
+}
+.copy-right{
+    
+      margin-left: 0px !important;
+}
+.bigcard
+{
+    height: 5000rem !important;
+}
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+
+
+  $('.building-link').click(function(){
+      
+      $('#movie-description').html($(this).data('description'));
+      $('#movie-img').attr("src", $(this).data('img'));
+      $('#movie-play').attr("href", $(this).data('link'));
+      $('#movie-title').html($(this).data('title'));
+         
+
+      
+  });
+  $('.build-link').click(function(){
+      
+      $('#movie-description').html("Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic molestiae quas accusamus delectus quae nostrum recusandae deleniti harum, praesentium, consequatur esse animi exercitationem nemo?  Architecto saepe sit dolores fugiat culpa.");
+      $('#movie-img').attr("src", "{% static 'assets/After.jpeg' %}");
+      $('#movie-title').html("After We Collided");      
+
+      
+  });
+  </script>

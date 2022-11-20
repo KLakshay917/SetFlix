@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class='bg-primary_black min-h-screen py-20 md:py-0 flex-col flex justify-center items-center' style="background-image: url('assets/bac_netflix.jpg');">
+        <h2 class="text-center font-medium text-5xl my-4 text-gray-100">
+            Who's watching ?
+        </h2>
+                  
+        <div class="flex flex-wrap justify-center items-center w-10/12  md:w-6/12">
+            {% for profile in profiles %}
+            <a href="{% url 'netflixapp:movie-list' profile_id=profile.uuid %}" >
+                <div   class="w-32 h-32 m-4  bg-blue-500 rounded-md cursor-pointer justify-center items-center flex-col flex building-link" >
+               
+                    <img src="{% static 'assets/icons/3.jpg' %}" id="icon" data-index="{{forloop.counter}}" alt="">
+                </div>
+                <div style="display: flex; justify-content: center;"  >
+                {{ profile.name }}
+            </div>
+            </a>
+            {% endfor %}
+            
+        </div>
+        <div class="flex justify-center items-center" style="margin-top: 2rem;">
+            <a href="{% url 'netflixapp:profile-create' %}" class="px-4 py-2 rounded-md outline-none bg-gray-400 text-gray-100 building-link" >
+                Add A New Profile
+            </a>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        
+        let arr=["{% static 'assets/icons/3.jpg' %}","{% static 'assets/icons/2.png' %}", "{% static 'assets/icons/1.png' %}",  
+        "{% static 'assets/icons/4.jpg' %}","{% static 'assets/icons/5.jpg' %}"]
+        let im=document.querySelectorAll("#icon");
+        let j;
+        for(let i=0;i<im.length;i++)
+        {   
+            j=i%5;
+            im[j].src=arr[j];
+        }
+    </script>
+
+
+{% endblock content %}

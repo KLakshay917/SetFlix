@@ -1,0 +1,539 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix 1st</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <!--Section is use to define sections like header and footer-->
+    <section class="container">
+        <div class="head">
+            <img src="{% static 'assets/logo.png' %}">
+            <a href="{% url 'account_login' %}"> Sign In </a>
+        </div>
+    </section>
+
+    <!--BANNER SECTION-->
+    <section class="banner">
+        <img src="{% static 'assets/bac.jpg' %}" class="fit">
+        <div class="box">
+            <div class="heading">
+                <h2>Unlimited movies, TV shows and more.</h2>
+                <h5>Watch anywhere. Cancel anytime.</h5>
+                <p>Ready to watch? Enter your email to create or restart your membership.</p>
+            </div>
+            <div class="search">
+                <input type="email" placeholder="Email Address">
+                <a href="{% url 'account_login' %}">Get Started</a>
+        </div>
+    </section>
+
+    <section class="part1">
+        <div class="talk">
+            <h1>Enjoy on your TV.</h1>
+            <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+        </div>
+        <div class="img">
+            <img src="{% static 'assets/tv.png' %}" alt="Netflix TV">
+            <video src="{% static 'assets/video.m4v' %}" id="vid" autoplay muted loop></video>
+            
+        </div>
+    </section>
+
+    <section class="part1">
+        <div class="img">
+            <img src="{% static 'assets/part2.jpg' %}" alt="Netflix TV">
+        </div>
+
+        <div class="talk" id="t2">
+            <h1>Download your shows to watch offline.</h1>
+            <p>Save your favourites easily and always have something to watch.</p>
+        </div>
+        
+    </section>
+
+    <section class="part1">
+        <div class="talk">
+            <h1>Watch everywhere.</h1>
+            <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+        </div>
+        <div class="img">
+            <img id="raj" src="{% static 'assets/rajma.png' %}" alt="Netflix TV">
+            <video src="{% static 'assets/video1.m4v' %}" id="vid1"autoplay muted loop></video>
+        </div>
+    </section>
+
+    <section class="part1">
+        <div class="img">
+            <img src="{% static 'assets/kid.png' %}" alt="Netflix TV">
+        </div>
+
+        <div class="talk" id="t2">
+            <h1>Create profiles for children.</h1>
+            <p>Send children on adventures with their favourite characters in a space made just for them—free with your membership.</p>
+        </div>
+        
+    </section>
+
+    <section class="list">
+        <h1>Frequently Asked Questions</h1>
+        <div class="accordion-menu">
+            <div class="item" id="item1">
+                <a href="#item1" class="title">
+                    <span>What is Netflix?</span>
+                <i class="icon"></i>
+                </a>
+                <p class="text">Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries and more – on thousands of internet-connected devices.
+                    <br><br>
+                    You can watch as much as you want, whenever you want, without a single ad – all for one low monthly price. There's always something new to discover, and new TV shows and movies are added every week!
+                </p>
+                
+                
+            </div>
+            <div class="item" id="item2">
+                <a href="#item2" class="title">
+                    <span>How much does Netflix cost?</span>
+                <i class="icon"></i>
+                </a>
+                <p class="text">Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee.<span style="color: red;"> FREE FOR YOU.</span> No extra costs, no contracts. </p>
+                
+                
+            </div>
+
+            <div class="ready">Ready to watch? Enter your email to create or restart your membership.</div>
+
+            <div class="search">
+                <input type="email" placeholder="Email Address">
+                <a href="https://www.netflix.com/login">Get Started ></a>
+            </div>
+        </div>
+    </section>
+    <div class="container footer">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+              <div class="row">
+                <div class="col-md-3">
+                      <ul>
+                        <li>Audio and Subtitle</li>
+                        <li>Media Center</li>
+                        <li>Privacy</li>
+                        <li>Contact Us</li>
+                      </ul>
+                </div>
+                <div class="col-md-3">
+                  <ul>
+                    <li>Audio description</li>
+                    <li>Investor Relation</li>
+                    <li>Terms and Conditions</li>
+                    <li>Legal Notices</li>
+                  </ul>
+            </div>
+            <div class="col-md-3">
+              <ul>
+                <li>Help Center</li>
+                <li>Jobs</li>
+          
+              </ul>
+             </div>
+             <div class="col-md-3">
+              <ul>
+                <li>Gift card</li>
+                <li>Subscription</li>
+          
+              </ul>
+             </div>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <div class="row">
+             
+              <div class="col">
+                <p class="copy-right" style="color: red;">@netflix copyright</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+          
+
+</body>
+</html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap');
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Roboto',sans-serif;
+}
+
+body{
+    background: black;
+}
+
+
+.container .head
+{
+position: absolute;
+top: 0;
+left: 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-left: 40px;
+width: 93%;
+z-index: 1000;
+}
+
+.container .head img
+{
+    width:10.2rem;
+}
+
+.container .head a
+{
+    text-decoration: none;
+    color: white;
+    background-color: red;
+    padding:8px 18px;
+    border-radius: 5px;
+    
+}
+
+.banner{
+    width: 100%;
+    height:100vh;
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: solid 8px rgba(94, 92, 92, 0.459);
+}
+
+.banner:before
+{
+   content: "";
+   position: absolute;
+   left: 0;
+   top:0;
+   width: 100%;
+   height: 400px;
+   z-index: 1;
+   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.836),transparent);
+}
+
+.banner:after
+{ content: "";
+   position: absolute;
+   left: 0;
+   bottom:0;
+   width: 100%;
+   height: 400px;
+   z-index: 1;
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.836),transparent);
+}
+
+.banner .fit
+{
+    width: 100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left: 0;
+    object-fit: cover;
+ /*  ^ use to cut sides of an image, preserving the aspect ratio, and fill in the space*/
+}
+
+.banner .box
+{  
+    position: absolute;
+    top:60%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 500; 
+}
+
+.banner .box .heading
+{  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+   
+}
+
+.banner .box .heading h2{
+    margin-left: 6%;
+    font-size: 3rem;
+    letter-spacing: 1.5px;
+    
+    width:90%;
+}
+
+.banner .box .heading h5{
+    font-size: 1.625rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    padding: 1rem 0;
+}
+
+.banner .box .heading p{
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 15px 0;
+    padding-bottom: 20px;
+}
+
+
+.banner .box .search
+{
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner .box .search input
+{   font-size: 1rem;
+    border: 1px solid #8c8c8c;
+    outline: none;
+    color: #000;
+    min-width:430px ;
+    padding-left:10px;
+    border-radius: 2px ;
+    height: 58px;
+    align-items: center;
+}
+
+.banner .box .search a
+{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+    background:#e50914;
+    font-size: 1.6rem;
+    line-height: 60px;
+    min-width: 150px;
+    padding: 0 30px;
+}
+
+.part1
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-left:4rem;
+    padding-right: 5rem;
+    padding-bottom: 4rem;
+    margin-top: 1.5rem;
+    border-bottom: solid 8px rgba(94, 92, 92, 0.459);
+}
+
+.part1 .talk
+{   width: 45%;
+    
+}
+
+.part1 .talk h1
+{   font-size: 3.3rem;
+    letter-spacing:2px ;
+    color: white;
+    margin-bottom: 3%;
+    
+}
+
+.part1 .talk p
+{   font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    color: white;
+    
+    
+}
+
+.part1 .img 
+{ 
+    width:44%;
+    height: 17%;
+}
+.footer{
+    margin-bottom: 100px;
+}
+ul{
+    list-style: none;
+    font-size: 15px ;
+    color: rgba(255, 255, 255, 0.367);
+    font-weight: 100;
+}
+li{
+    padding: .4rem;
+}
+.part1 .img img
+{
+    width: 100%;
+}
+
+#vid
+{
+    position: absolute;
+    display: block;
+    z-index: -1;
+    top: 55vw;
+    left:56.5vw;
+    width: 31%;
+    padding:0 0 0 0;
+    
+}
+#vid1
+{
+    
+    position: absolute;
+    display: block;
+    z-index: -1;
+    top: 124vw;
+    left: 58vw;
+    width: 25%;
+}
+#t2
+{
+width:48%
+}
+
+.list
+{  width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin: auto;
+    color: white;
+}
+
+.list h1{
+    font-size: 2.8rem;
+    letter-spacing: 1px;
+    padding: 3rem 0 4rem 0;
+}
+
+.title
+{
+    background: #303030 ;
+    text-decoration: none;
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.icon
+{
+    width: 20px;
+    position: relative;
+}
+
+.icon::before,.icon::after
+{
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 1px;
+    background: white;
+}
+
+.icon::after
+{
+    transform: rotate(90deg);
+}
+
+.text
+{
+    background: #303030 ;
+    color: white;
+    line-height: 35px;
+    margin: 1px 0;
+    opacity: 0;
+    height: 0;
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.item:target .text
+{
+    opacity:1;
+    height: auto;
+    padding:20px 30px;
+    margin-bottom: 6px;
+}
+
+.item:target .icon::after
+{
+    transform: rotate(135deg);
+    transition: 0.5s linear;
+}
+
+.item:target .icon::before
+{
+    transform: rotate(45deg);
+    transition: 0.5s linear;
+}
+
+.ready
+{justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-top: 4rem;
+    padding: 0 0 0 6.2rem;
+    margin-bottom: 1rem;
+}
+
+.list .search
+{
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.list .search input
+{   font-size: 1rem;
+    border: 1px solid #8c8c8c;
+    outline: none;
+    color: #000;
+    min-width:430px ;
+    padding-left:10px;
+    border-radius: 2px ;
+    height: 58px;
+    align-items: center;
+}
+
+.list .search a
+{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+    background:#e50914;
+    font-size: 1.6rem;
+    line-height: 60px;
+    min-width: 150px;
+    padding: 0 30px;
+}
+
+</style>
